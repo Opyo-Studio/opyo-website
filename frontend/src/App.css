@@ -1,0 +1,7 @@
+/* OPYO — minimal app-level styles. Most styling lives in index.css. */
+.App {
+  min-height: 100vh;
+  position: relative;
+  background: #060708;
+  color: #e8eef5;
+}
