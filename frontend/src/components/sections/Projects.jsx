@@ -4,13 +4,12 @@ import { fetchProjects } from "../../lib/api";
 import { playHover } from "../../hooks/useSound";
 import { ArrowUpRight } from "lucide-react";
 
-const CORE_CODES = ["OPYO.NEXUS", "OPYO.ENGINE", "PRZMO", "OPYO.STUDIOS"];
+const CORE_CODES = ["OPYO.ENGINE", "OPYO.COMMUNITY", "OPYO.LABS"];
 
 const FALLBACK = [
-  { code: "OPYO.NEXUS", name: "OPYO Nexus", tagline: "AI workstation.", description: "", category: "WORKSTATION", status: "BETA" },
   { code: "OPYO.ENGINE", name: "OPYO Engine", tagline: "AI streaming infrastructure.", description: "", category: "INFRASTRUCTURE", status: "IN_DEV" },
-  { code: "PRZMO", name: "PRZMO", tagline: "Identity & network.", description: "", category: "PLATFORM", status: "IN_DEV" },
-  { code: "OPYO.STUDIOS", name: "OPYO Studios", tagline: "Games & publishing.", description: "", category: "STUDIO", status: "LIVE" },
+  { code: "OPYO.COMMUNITY", name: "OPYO Community", tagline: "Community platform for builders, creators, and gamers.", description: "", category: "PLATFORM", status: "LIVE" },
+  { code: "OPYO.LABS", name: "OPYO Labs", tagline: "Coming soon.", description: "", category: "EXPERIMENT", status: "COMING_SOON" },
 ];
 
 function Row({ project, index, flagship, hovered, setHovered }) {
@@ -84,8 +83,8 @@ export default function Projects({ onClose }) {
       eyebrow="Projects"
       title={
         <>
-          Four systems.<br />
-          <span className="text-[#60A5FA] glow-text">One ecosystem.</span>
+          3 SYSTEMS /<br />
+          <span className="text-[#60A5FA] glow-text">1 ECOSYSTEM</span>
         </>
       }
       tagline="Infrastructure · Platform · Tools · Content. A living catalog of what OPYO is shipping, researching, and inventing."
@@ -94,7 +93,7 @@ export default function Projects({ onClose }) {
       <div className="mb-20">
         <div className="flex items-end justify-between mb-6">
           <div className="font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] text-[#60A5FA]">
-            Core / 01–04
+            Core / 01–03
           </div>
           <div className="font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] text-[#8B9BB4]">
             {core.length} systems
@@ -106,7 +105,7 @@ export default function Projects({ onClose }) {
               key={p.code}
               project={p}
               index={i + 1}
-              flagship={p.code === "OPYO.NEXUS"}
+              flagship={false}
               hovered={hovered}
               setHovered={setHovered}
             />
@@ -130,7 +129,7 @@ export default function Projects({ onClose }) {
               <Row
                 key={p.code}
                 project={p}
-                index={i + 5}
+                index={i + 4}
                 flagship={false}
                 hovered={hovered}
                 setHovered={setHovered}

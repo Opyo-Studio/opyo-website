@@ -29,12 +29,12 @@ class TestHealth:
 # ============ Seeded Projects ============
 
 class TestProjects:
-    def test_projects_six_seeded(self):
+    def test_projects_three_seeded(self):
         r = requests.get(f"{API}/projects")
         assert r.status_code == 200
         data = r.json()
         assert isinstance(data, list)
-        assert len(data) == 6, f"expected 6 projects, got {len(data)}"
+        assert len(data) == 3, f"expected 3 projects, got {len(data)}"
         required = {"id", "code", "name", "tagline", "description", "category", "status", "order"}
         for p in data:
             missing = required - set(p.keys())
