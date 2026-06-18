@@ -2,9 +2,9 @@ import React from "react";
 import SectionShell from "../SectionShell";
 
 const PILLARS = [
-  { n: "01", t: "Engine", s: "Infrastructure" },
-  { n: "02", t: "OPYO", s: "Platform" },
-  { n: "03", t: "Studios", s: "Content" },
+  { n: "01", t: "Streaming Engine", s: "INFRASTRUCTURE" },
+  { n: "02", t: "OPYO Community", s: "PLATFORM" },
+  { n: "03", t: "OPYO Labs", s: "RESEARCH" },
 ];
 
 export default function Vision({ onClose }) {
