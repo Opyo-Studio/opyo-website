@@ -15,7 +15,7 @@ export default function Vision({ onClose }) {
       title={
         <>
           We build<br />
-          <span className="text-[#60A5FA] glow-text">ecosystems.</span>
+          <span className="text-[#60A5FA] glow-text">Ecosystems.</span>
         </>
       }
       tagline="The operating system for games, creators, and players. Three systems. One ecosystem."
