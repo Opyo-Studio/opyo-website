@@ -83,7 +83,7 @@ export default function Projects({ onClose }) {
       eyebrow="Projects"
       title={
         <>
-          3 SYSTEMS /<br />
+          3 PLATFORMS /<br />
           <span className="text-[#60A5FA] glow-text">1 ECOSYSTEM</span>
         </>
       }

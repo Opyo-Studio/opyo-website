@@ -22,7 +22,7 @@ export default function About({ onClose }) {
     >
       <div className="grid md:grid-cols-3 gap-10 md:gap-14 mb-24">
         {[
-          { k: "Mission", v: "Give every creator, player, and developer an operating system worthy of their imagination." },
+          { k: "Mission", v: "Give every creator, player, and developer an AI gaming ecosystem worthy of their imagination." },
           { k: "Approach", v: "AI-native by default. Infrastructure-first. Premium craft at every seam." },
           { k: "Stance", v: "We ship slowly and with taste. Tools that disappear. Systems that last." },
         ].map((x) => (
