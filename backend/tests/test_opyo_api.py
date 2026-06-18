@@ -51,12 +51,12 @@ class TestProjects:
 # ============ Seeded People ============
 
 class TestPeople:
-    def test_people_six_seeded(self):
+    def test_people_three_seeded(self):
         r = requests.get(f"{API}/people")
         assert r.status_code == 200
         data = r.json()
         assert isinstance(data, list)
-        assert len(data) == 6
+        assert len(data) == 3
         for p in data:
             assert "_id" not in p
             assert "name" in p and "role" in p and "bio" in p

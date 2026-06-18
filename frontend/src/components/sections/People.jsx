@@ -6,9 +6,6 @@ const FALLBACK = [
   { name: "Operator 01", role: "Founder & CEO", bio: "System architect." },
   { name: "Operator 02", role: "CTO", bio: "Runtime & AI infra." },
   { name: "Operator 03", role: "Head of Studio", bio: "Narrative design." },
-  { name: "Operator 04", role: "Head of Platform", bio: "Identity & trust." },
-  { name: "Operator 05", role: "Director, Nexus", bio: "Agentic UX." },
-  { name: "Operator 06", role: "Design Lead", bio: "Human-system interfaces." },
 ];
 
 function Avatar({ index }) {

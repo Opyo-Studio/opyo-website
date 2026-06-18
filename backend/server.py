@@ -139,9 +139,6 @@ SEED_PEOPLE = [
     {"name": "Operator 01", "role": "Founder & CEO", "bio": "System architect. Builds ecosystems from first principles.", "order": 1},
     {"name": "Operator 02", "role": "Chief Technology Officer", "bio": "Runtime & AI infrastructure. Ex-distributed systems.", "order": 2},
     {"name": "Operator 03", "role": "Head of Studio", "bio": "Narrative design. Worlds-first mindset.", "order": 3},
-    {"name": "Operator 04", "role": "Head of Platform", "bio": "Identity, networks, trust.", "order": 4},
-    {"name": "Operator 05", "role": "Director, Nexus", "bio": "Agentic UX for creators.", "order": 5},
-    {"name": "Operator 06", "role": "Design Lead", "bio": "Interfaces between humans and systems.", "order": 6},
 ]
 
 
