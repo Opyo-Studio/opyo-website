@@ -100,9 +100,9 @@ SEED_PROJECTS = [
 ]
 
 SEED_PEOPLE = [
-    {"name": "Operator 01", "role": "Founder & CEO", "bio": "System architect. Builds ecosystems from first principles.", "order": 1},
-    {"name": "Operator 02", "role": "Chief Technology Officer", "bio": "Runtime & AI infrastructure. Ex-distributed systems.", "order": 2},
-    {"name": "Operator 03", "role": "Head of Studio", "bio": "Narrative design. Worlds-first mindset.", "order": 3},
+    {"name": "Operator 01", "role": "Co-Founder & CEO", "bio": "System architect. Builds ecosystems from first principles.", "avatar_url": "/operators/ceo.png", "order": 1},
+    {"name": "Operator 02", "role": "Co-Founder & CTO", "bio": "Runtime & AI infrastructure. Ex-distributed systems.", "avatar_url": "/operators/cto.png", "order": 2},
+    {"name": "Operator 03", "role": "Head of Studio", "bio": "Narrative design. Worlds-first mindset.", "avatar_url": "/operators/studio.png", "order": 3},
 ]
 
 
@@ -151,6 +151,7 @@ async def list_applications():
 # Include the router in the main app
 app.include_router(api_router)
 
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
@@ -184,11 +185,18 @@ async def seed_collections():
         await db.projects.delete_many({"code": {"$nin": active_codes}})
         logger.info("Projects collection upserted from seed")
 
-        if await db.people.count_documents({}) == 0:
-            for p in SEED_PEOPLE:
-                obj = Person(**p).model_dump()
-                await db.people.insert_one(obj)
-            logger.info("Seeded people collection")
+        # Upsert people by `name` so updated seed data is always applied on restart
+        for p in SEED_PEOPLE:
+            obj = Person(**p).model_dump()
+            await db.people.update_one(
+                {"name": obj["name"]},
+                {"$set": obj},
+                upsert=True,
+            )
+        # Remove any stale people whose name is no longer in the seed list
+        active_names = [p["name"] for p in SEED_PEOPLE]
+        await db.people.delete_many({"name": {"$nin": active_names}})
+        logger.info("People collection upserted from seed")
     except Exception as e:
         logger.error(f"Seed error: {e}")
 
