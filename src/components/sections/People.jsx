@@ -1,12 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SectionShell from "../SectionShell";
-import { fetchPeople } from "../../lib/api";
-
-const FALLBACK = [
-  { name: "Operator 01", role: "Co-Founder & CEO", bio: "System architect.", avatar_url: "/operators/ceo.png" },
-  { name: "Operator 02", role: "Co-Founder & CTO", bio: "Runtime & AI infra.", avatar_url: "/operators/cto.png" },
-  { name: "Operator 03", role: "Head of Studio", bio: "Narrative design.", avatar_url: "/operators/studio.png" },
-];
+import { PEOPLE } from "../../lib/content";
 
 function Avatar({ index, avatarUrl }) {
   const num = String(index + 1).padStart(2, "0");
@@ -52,14 +46,6 @@ function Avatar({ index, avatarUrl }) {
 }
 
 export default function People({ onClose }) {
-  const [people, setPeople] = useState([]);
-
-  useEffect(() => {
-    fetchPeople()
-      .then((d) => setPeople(d?.length ? d : FALLBACK))
-      .catch(() => setPeople(FALLBACK));
-  }, []);
-
   return (
     <SectionShell
       code="PPL / 03"
@@ -74,9 +60,9 @@ export default function People({ onClose }) {
       onClose={onClose}
     >
       <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-        {people.map((p, i) => (
+        {PEOPLE.map((p, i) => (
           <div
-            key={p.id || i}
+            key={p.name}
             data-testid={`person-card-${i}`}
             className="group"
           >
