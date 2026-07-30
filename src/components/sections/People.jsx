@@ -1,15 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SectionShell from "../SectionShell";
-import { fetchPeople } from "../../lib/api";
-
-const FALLBACK = [
-  { name: "Operator 01", role: "Founder & CEO", bio: "System architect." },
-  { name: "Operator 02", role: "CTO", bio: "Runtime & AI infra." },
-  { name: "Operator 03", role: "Head of Studio", bio: "Narrative design." },
-  { name: "Operator 04", role: "Head of Platform", bio: "Identity & trust." },
-  { name: "Operator 05", role: "Director, Nexus", bio: "Agentic UX." },
-  { name: "Operator 06", role: "Design Lead", bio: "Human-system interfaces." },
-];
+import { PEOPLE } from "../../lib/content";
 
 function Avatar({ index }) {
   const num = String(index + 1).padStart(2, "0");
@@ -45,14 +36,6 @@ function Avatar({ index }) {
 }
 
 export default function People({ onClose }) {
-  const [people, setPeople] = useState([]);
-
-  useEffect(() => {
-    fetchPeople()
-      .then((d) => setPeople(d?.length ? d : FALLBACK))
-      .catch(() => setPeople(FALLBACK));
-  }, []);
-
   return (
     <SectionShell
       code="PPL / 03"
@@ -67,9 +50,9 @@ export default function People({ onClose }) {
       onClose={onClose}
     >
       <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-        {people.map((p, i) => (
+        {PEOPLE.map((p, i) => (
           <div
-            key={p.id || i}
+            key={p.name}
             data-testid={`person-card-${i}`}
             className="group"
           >

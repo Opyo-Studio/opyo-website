@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SectionShell from "../SectionShell";
-import { fetchProjects } from "../../lib/api";
+import { PROJECTS } from "../../lib/content";
 import { playHover } from "../../hooks/useSound";
 import { ArrowUpRight } from "lucide-react";
 
 const CORE_CODES = ["OPYO.NEXUS", "OPYO.ENGINE", "PRZMO", "OPYO.STUDIOS"];
 
-const FALLBACK = [
-  { code: "OPYO.NEXUS", name: "OPYO Nexus", tagline: "AI workstation.", description: "", category: "WORKSTATION", status: "BETA" },
-  { code: "OPYO.ENGINE", name: "OPYO Engine", tagline: "AI streaming infrastructure.", description: "", category: "INFRASTRUCTURE", status: "IN_DEV" },
-  { code: "PRZMO", name: "PRZMO", tagline: "Identity & network.", description: "", category: "PLATFORM", status: "IN_DEV" },
-  { code: "OPYO.STUDIOS", name: "OPYO Studios", tagline: "Games & publishing.", description: "", category: "STUDIO", status: "LIVE" },
-];
+const core = CORE_CODES.map((c) => PROJECTS.find((p) => p.code === c)).filter(
+  Boolean
+);
+const experiments = PROJECTS.filter((p) => !CORE_CODES.includes(p.code)).sort(
+  (a, b) => a.order - b.order
+);
 
 function Row({ project, index, flagship, hovered, setHovered }) {
   const isHover = hovered === project.code;
@@ -64,19 +64,7 @@ function Row({ project, index, flagship, hovered, setHovered }) {
 }
 
 export default function Projects({ onClose }) {
-  const [projects, setProjects] = useState([]);
   const [hovered, setHovered] = useState(null);
-
-  useEffect(() => {
-    fetchProjects()
-      .then((d) => setProjects(d?.length ? d : FALLBACK))
-      .catch(() => setProjects(FALLBACK));
-  }, []);
-
-  const core = CORE_CODES.map((c) =>
-    projects.find((p) => p.code === c)
-  ).filter(Boolean);
-  const experiments = projects.filter((p) => !CORE_CODES.includes(p.code));
 
   return (
     <SectionShell
