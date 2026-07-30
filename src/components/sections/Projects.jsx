@@ -4,7 +4,7 @@ import { PROJECTS } from "../../lib/content";
 import { playHover } from "../../hooks/useSound";
 import { ArrowUpRight } from "lucide-react";
 
-const CORE_CODES = ["OPYO.NEXUS", "OPYO.ENGINE", "PRZMO", "OPYO.STUDIOS"];
+const CORE_CODES = ["OPYO.ENGINE", "OPYO.COMMUNITY", "OPYO.LABS"];
 
 const core = CORE_CODES.map((c) => PROJECTS.find((p) => p.code === c)).filter(
   Boolean
@@ -72,8 +72,8 @@ export default function Projects({ onClose }) {
       eyebrow="Projects"
       title={
         <>
-          Four systems.<br />
-          <span className="text-[#60A5FA] glow-text">One ecosystem.</span>
+          3 PLATFORMS /<br />
+          <span className="text-[#60A5FA] glow-text">1 ECOSYSTEM</span>
         </>
       }
       tagline="Infrastructure · Platform · Tools · Content. A living catalog of what OPYO is shipping, researching, and inventing."
@@ -82,7 +82,7 @@ export default function Projects({ onClose }) {
       <div className="mb-20">
         <div className="flex items-end justify-between mb-6">
           <div className="font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] text-[#60A5FA]">
-            Core / 01–04
+            Core / 01–03
           </div>
           <div className="font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] text-[#8B9BB4]">
             {core.length} systems
@@ -94,7 +94,7 @@ export default function Projects({ onClose }) {
               key={p.code}
               project={p}
               index={i + 1}
-              flagship={p.code === "OPYO.NEXUS"}
+              flagship={false}
               hovered={hovered}
               setHovered={setHovered}
             />
@@ -118,7 +118,7 @@ export default function Projects({ onClose }) {
               <Row
                 key={p.code}
                 project={p}
-                index={i + 5}
+                index={i + 4}
                 flagship={false}
                 hovered={hovered}
                 setHovered={setHovered}

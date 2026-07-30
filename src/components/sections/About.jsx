@@ -2,10 +2,8 @@ import React from "react";
 import SectionShell from "../SectionShell";
 
 const TIMELINE = [
-  { y: "2024", t: "Signal", d: "First proof that gameplay is data, not just entertainment." },
-  { y: "2025", t: "Nexus", d: "The AI workstation — chat, IDE, terminal, voice, multi-model." },
-  { y: "2026", t: "Engine + Studios", d: "Streaming runtime ships. Publishing label opens." },
-  { y: "soon", t: "PRZMO", d: "Identity, tournaments, marketplace, community." },
+  { y: "2025", t: "Streaming Engine", d: "AI streaming infrastructure for creators, developers, and interactive experiences." },
+  { y: "2026", t: "OPYO Community", d: "The platform connecting builders, creators, gamers, and ecosystem participants." },
 ];
 
 export default function About({ onClose }) {
@@ -24,7 +22,7 @@ export default function About({ onClose }) {
     >
       <div className="grid md:grid-cols-3 gap-10 md:gap-14 mb-24">
         {[
-          { k: "Mission", v: "Give every creator, player, and developer an operating system worthy of their imagination." },
+          { k: "Mission", v: "Give every creator, player, and developer an AI gaming ecosystem worthy of their imagination." },
           { k: "Approach", v: "AI-native by default. Infrastructure-first. Premium craft at every seam." },
           { k: "Stance", v: "We ship slowly and with taste. Tools that disappear. Systems that last." },
         ].map((x) => (

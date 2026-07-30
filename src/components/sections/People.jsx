@@ -2,7 +2,7 @@ import React from "react";
 import SectionShell from "../SectionShell";
 import { PEOPLE } from "../../lib/content";
 
-function Avatar({ index }) {
+function Avatar({ index, avatarUrl }) {
   const num = String(index + 1).padStart(2, "0");
   return (
     <div
@@ -12,8 +12,18 @@ function Avatar({ index }) {
           "radial-gradient(ellipse at 50% 20%, rgba(59,130,246,0.22), transparent 65%), linear-gradient(180deg, #0C0E12 0%, #060708 100%)",
       }}
     >
+      {avatarUrl && (
+        <img
+          src={avatarUrl}
+          alt={`Operator ${num}`}
+          className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-85 group-hover:scale-105 transition-all duration-500 ease-out"
+        />
+      )}
       <div
-        className="absolute inset-0 opacity-[0.08]"
+        className="absolute inset-0 bg-gradient-to-t from-[#060708] via-transparent to-[#0C0E12]/10 opacity-90 pointer-events-none"
+      />
+      <div
+        className="absolute inset-0 opacity-[0.08] pointer-events-none"
         style={{
           backgroundImage:
             "linear-gradient(0deg, transparent 96%, rgba(96,165,250,0.4) 100%), linear-gradient(90deg, transparent 96%, rgba(96,165,250,0.4) 100%)",
@@ -21,12 +31,12 @@ function Avatar({ index }) {
         }}
       />
       <div
-        className="absolute top-5 left-5 font-mono text-[10px] uppercase tracking-[0.3em] text-[#60A5FA]"
+        className="absolute top-5 left-5 font-mono text-[10px] uppercase tracking-[0.3em] text-[#60A5FA] z-10"
       >
         /{num}
       </div>
       <span
-        className="relative font-display font-bold text-[#E8EEF5] glow-text"
+        className="relative font-display font-bold text-[#E8EEF5] glow-text z-10"
         style={{ fontSize: "clamp(64px, 11vw, 140px)", lineHeight: 0.8, letterSpacing: "-0.04em" }}
       >
         {num}
@@ -56,7 +66,7 @@ export default function People({ onClose }) {
             data-testid={`person-card-${i}`}
             className="group"
           >
-            <Avatar index={i} />
+            <Avatar index={i} avatarUrl={p.avatar_url} />
             <div className="pt-5 border-t border-[#1E293B] group-hover:border-[#60A5FA] transition-colors">
               <div className="flex items-baseline justify-between mb-2">
                 <div
