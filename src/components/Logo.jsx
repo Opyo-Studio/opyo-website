@@ -1,30 +1,27 @@
 import React from "react";
 
-/**
- * OPYO brand logo — renders the octopus mark as a masked element
- * so it inherits currentColor and can be tinted + glowed via CSS.
- *
- * Uses CSS mask-image because the SVG fills are currentColor but
- * <img> elements don't inherit text color. The mask approach treats
- * the SVG alpha channel as a mask on a colored div.
- */
+// Each mark has its own intrinsic aspect ratio. Rendering a non-square asset in
+// a square box leaves invisible padding that pushes adjacent text away, so the
+// box is derived from the source viewBox instead of assumed to be square.
+const ASSETS = {
+  mark: { src: "/brand/opyo-mark-clean.svg", ratio: 215.23 / 210.33 },
+  energy: { src: "/brand/opyo-energy-clean.svg", ratio: 1 },
+};
+
 export default function Logo({
   variant = "mark",
   size = 24,
   className = "",
   glow = false,
 }) {
-  const src =
-    variant === "energy"
-      ? "/brand/opyo-energy-clean.svg"
-      : "/brand/opyo-mark-clean.svg";
+  const { src, ratio } = ASSETS[variant] || ASSETS.mark;
   return (
     <span
       className={`inline-block shrink-0 ${className}`}
       aria-label="OPYO"
       style={{
         width: size,
-        height: size,
+        height: size / ratio,
         backgroundColor: "currentColor",
         WebkitMask: `url(${src}) center/contain no-repeat`,
         mask: `url(${src}) center/contain no-repeat`,

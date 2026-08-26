@@ -1,5 +1,6 @@
 import React from "react";
 import SectionShell from "../SectionShell";
+import { playHover } from "../../hooks/useSound";
 
 const PILLARS = [
   { n: "01", t: "Streaming Engine", s: "INFRASTRUCTURE" },
@@ -10,20 +11,24 @@ const PILLARS = [
 export default function Vision({ onClose }) {
   return (
     <SectionShell
-      code="V / 01"
+      code="OPYO STUDIO"
       eyebrow="Vision"
       title={
         <>
-          We build<br />
-          <span className="text-[#60A5FA] glow-text">Ecosystems.</span>
+          We are building<br />
+          <span className="text-[#60A5FA] glow-text">Ecosystem.</span>
         </>
       }
-      tagline="The operating system for games, creators, and players. Three systems. One ecosystem."
+      tagline="The operating systems for creators, players and games. Three systems. One ecosystem."
       onClose={onClose}
     >
       <div className="grid md:grid-cols-3 gap-8 md:gap-10 -mt-5 md:-mt-7 pt-4">
         {PILLARS.map((p, i) => (
-          <div key={p.n} className="border-t border-[#1E293B] pt-6 group">
+          <div
+            key={p.n}
+            onMouseEnter={playHover}
+            className="border-t border-[#1E293B] pt-6 group"
+          >
             <div className="flex items-baseline justify-between mb-6">
               <span className="font-mono text-[10px] font-normal uppercase tracking-[0.35em] text-[#93C5FD]">
                 /{p.n}

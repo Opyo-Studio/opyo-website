@@ -1,6 +1,7 @@
 import React from "react";
 import SectionShell from "../SectionShell";
 import { PEOPLE } from "../../lib/content";
+import { playHover } from "../../hooks/useSound";
 
 function Avatar({ index, avatarUrl }) {
   const num = String(index + 1).padStart(2, "0");
@@ -48,7 +49,7 @@ function Avatar({ index, avatarUrl }) {
 export default function People({ onClose }) {
   return (
     <SectionShell
-      code="PPL / 03"
+      code="OPYO STUDIO"
       eyebrow="People"
       title={
         <>
@@ -64,6 +65,7 @@ export default function People({ onClose }) {
           <div
             key={p.name}
             data-testid={`person-card-${i}`}
+            onMouseEnter={playHover}
             className="group"
           >
             <Avatar index={i} avatarUrl={p.avatar_url} />

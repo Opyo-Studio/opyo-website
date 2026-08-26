@@ -21,7 +21,7 @@ export default function SectionShell({ code, eyebrow, title, tagline, children }
       </div>
 
       <div className="flex-1 overflow-y-auto">
-        <div className="max-w-[1400px] mx-auto w-full px-5 md:px-10 pt-12 md:pt-20 pb-24 md:pb-40">
+        <div className="max-w-[1400px] mx-auto w-full px-5 md:px-10 pt-12 md:pt-20 pb-16 md:pb-30">
           <div className="mb-16 md:mb-24 max-w-4xl">
             {eyebrow && (
               <div className="font-mono text-[10px] md:text-xs uppercase tracking-[0.35em] text-[#60A5FA] mb-6">

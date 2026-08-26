@@ -9,7 +9,7 @@ const TIMELINE = [
 export default function About({ onClose }) {
   return (
     <SectionShell
-      code="A / 05"
+      code="OPYO STUDIO"
       eyebrow="About"
       title={
         <>
@@ -20,7 +20,7 @@ export default function About({ onClose }) {
       tagline="An independent studio building the infrastructure behind the next generation of worlds."
       onClose={onClose}
     >
-      <div className="grid md:grid-cols-3 gap-10 md:gap-14 mb-24">
+      <div className="grid md:grid-cols-3 gap-10 md:gap-14">
         {[
           { k: "Mission", v: "Give every creator, player, and developer an AI gaming ecosystem worthy of their imagination." },
           { k: "Approach", v: "AI-native by default. Infrastructure-first. Premium craft at every seam." },
@@ -40,7 +40,7 @@ export default function About({ onClose }) {
         ))}
       </div>
 
-      <div>
+      {/* <div>
         <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#60A5FA] mb-8">
           Timeline
         </div>
@@ -68,7 +68,7 @@ export default function About({ onClose }) {
           ))}
           <div className="border-t border-[#1E293B]" />
         </div>
-      </div>
+      </div> */}
     </SectionShell>
   );
 }

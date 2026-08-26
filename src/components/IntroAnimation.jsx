@@ -1,12 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-
-/**
- * Opening video — plays /brand/opyo-intro.mp4 full-bleed, muted autoplay,
- * then hands off to the main hub via onDone.
- *
- * Keeps the brand header + skip control and a thin progress bar that tracks
- * video.currentTime so the boot feel persists.
- */
 export default function IntroAnimation({ onDone }) {
   const videoRef = useRef(null);
   const [pct, setPct] = useState(0);
@@ -37,7 +29,6 @@ export default function IntroAnimation({ onDone }) {
     const playPromise = v.play();
     if (playPromise && typeof playPromise.catch === "function") {
       playPromise.catch(() => {
-        // autoplay was blocked — fall through on skip
       });
     }
 
@@ -80,15 +71,13 @@ export default function IntroAnimation({ onDone }) {
         <div className="flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA] pulse-dot" />
           <span className="tracking-[0.22em]">OPYO STUDIO</span>
-          <span className="text-[#1E293B]">//</span>
-          <span className="text-[#8B9BB4]">sequence / intro</span>
         </div>
         <button
           data-testid="boot-skip-button"
           onClick={finish}
-          className="text-[#8B9BB4] hover:text-[#60A5FA] transition-colors"
+          className="text-[#8B9BB4] hover:text-[#60A5FA] transition-colors uppercase tracking-[0.28em]"
         >
-          skip
+          SKIP
         </button>
       </div>
 

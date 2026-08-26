@@ -27,10 +27,10 @@ function HUD() {
   return (
     <>
       <div
-        className="fixed top-5 md:top-8 left-5 md:left-10 z-30 flex items-center gap-4 select-none"
+        className="fixed top-5 md:top-8 left-5 md:left-10 z-30 flex items-center gap-2 select-none"
         data-testid="hud-brand"
       >
-        <Logo size={56} glow className="text-[#E8EEF5]" />
+        <Logo size={36} glow className="text-[#E8EEF5]" />
         <div className="flex flex-col leading-none">
           <span className="font-display text-lg md:text-xl font-bold tracking-[0.22em] text-[#E8EEF5]">
             OPYO
@@ -44,7 +44,7 @@ function HUD() {
         {ts}
       </div>
       <div className="fixed bottom-5 md:bottom-8 left-5 md:left-10 z-30 font-mono text-[9px] md:text-[10px] uppercase tracking-[0.28em] text-[#8B9BB4] select-none max-w-[160px] md:max-w-none">
-        four systems · one ecosystem
+        three systems · one ecosystem
       </div>
     </>
   );

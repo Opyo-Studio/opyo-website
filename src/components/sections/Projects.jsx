@@ -68,7 +68,7 @@ export default function Projects({ onClose }) {
 
   return (
     <SectionShell
-      code="P / 02"
+      code="OPYO STUDIO"
       eyebrow="Projects"
       title={
         <>
@@ -76,7 +76,7 @@ export default function Projects({ onClose }) {
           <span className="text-[#60A5FA] glow-text">1 ECOSYSTEM</span>
         </>
       }
-      tagline="Infrastructure · Platform · Tools · Content. A living catalog of what OPYO is shipping, researching, and inventing."
+      tagline="Infrastructure · Platform · Tools . A living catalog of what OPYO is shipping, researching, and inventing."
       onClose={onClose}
     >
       <div className="mb-20">

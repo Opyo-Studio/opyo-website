@@ -1,10 +1,10 @@
 import React from "react";
 import SectionShell from "../SectionShell";
-import { playClick } from "../../hooks/useSound";
+import { playClick, playHover } from "../../hooks/useSound";
 import { ArrowUpRight } from "lucide-react";
 
 // Update this to the real inbox.
-const CAREERS_EMAIL = "careers@opyo.dev";
+const CAREERS_EMAIL = "rohit@opyostudio.com";
 
 const INCLUDE = [
   {
@@ -32,7 +32,7 @@ const INCLUDE = [
 export default function Careers({ onClose }) {
   return (
     <SectionShell
-      code="C / 06"
+      code="OPYO STUDIO"
       eyebrow="Careers"
       title={
         <>
@@ -53,6 +53,7 @@ export default function Careers({ onClose }) {
           )}`}
           data-testid="careers-email-link"
           onClick={playClick}
+          onMouseEnter={playHover}
           className="group inline-flex items-baseline gap-3 md:gap-5 font-display font-semibold text-[#E8EEF5] hover:text-[#60A5FA] transition-colors duration-300"
           style={{
             fontSize: "clamp(30px, 6vw, 76px)",
@@ -80,14 +81,15 @@ export default function Careers({ onClose }) {
           {INCLUDE.map((x) => (
             <div
               key={x.k}
-              className="border-t border-[#1E293B] py-7 md:py-8 grid grid-cols-12 gap-6 items-baseline"
+              onMouseEnter={playHover}
+              className="group border-t border-[#1E293B] py-7 md:py-8 grid grid-cols-12 gap-6 items-baseline transition-colors duration-300 hover:border-[#60A5FA]"
             >
               <div className="col-span-2 md:col-span-1 font-mono text-[10px] uppercase tracking-[0.3em] text-[#60A5FA]">
                 /{x.k}
               </div>
               <div className="col-span-10 md:col-span-4">
                 <div
-                  className="font-display font-semibold text-2xl md:text-4xl text-[#E8EEF5]"
+                  className="font-display font-semibold text-2xl md:text-4xl text-[#E8EEF5] group-hover:text-[#60A5FA] transition-colors duration-300"
                   style={{ letterSpacing: "-0.02em" }}
                 >
                   {x.t}
