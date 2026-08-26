@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Eye,
   LayoutGrid,
@@ -16,8 +16,29 @@ const ITEMS = [
   { key: "careers", label: "Careers", Icon: Briefcase },
 ];
 
-export default function RadialMenu({ onSelect, mouse }) {
+export default function RadialMenu({ onSelect }) {
   const [hovered, setHovered] = useState(null);
+
+  // Pointer parallax is owned here rather than in App: keeping it local stops
+  // every mousemove from re-rendering the HUD, nav and active section.
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const rafRef = useRef(null);
+  useEffect(() => {
+    const onMove = (e) => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        setMouse({
+          x: e.clientX / window.innerWidth - 0.5,
+          y: e.clientY / window.innerHeight - 0.5,
+        });
+      });
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, []);
 
   const radius = useMemo(() => {
     if (typeof window === "undefined") return 300;

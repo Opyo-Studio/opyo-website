@@ -8,6 +8,8 @@ import * as THREE from "three";
  * which R3F rejects on Three.js objects. By adding Three objects directly
  * to the scene via useEffect + useThree, we bypass JSX reconciliation.
  */
+const EDGE_INTERVAL = 3;
+
 function Scene({ count = 650, radius = 14 }) {
   const { scene, mouse } = useThree();
   const stateRef = useRef(null);
@@ -92,9 +94,12 @@ function Scene({ count = 650, radius = 14 }) {
     };
   }, [scene, built]);
 
+  const frameRef = useRef(0);
+
   useFrame((state, delta) => {
     const s = stateRef.current;
     if (!s) return;
+    const frame = frameRef.current++;
     const t = state.clock.elapsedTime;
     const mx = mouse.x * 6;
     const my = mouse.y * 6;
@@ -127,7 +132,15 @@ function Scene({ count = 650, radius = 14 }) {
     }
     s.points.geometry.attributes.position.needsUpdate = true;
 
-    // edges
+    // Edges drift slowly and draw at 0.09 opacity, so rebuilding the O(n^2)
+    // neighbour search every 3rd frame looks identical and removes about two
+    // thirds of the per-frame CPU cost.
+    if (frame % EDGE_INTERVAL !== 0) {
+      s.group.rotation.y += delta * 0.03;
+      s.group.rotation.x = mouse.y * 0.12;
+      return;
+    }
+
     let ePtr = 0;
     const step = 3;
     const maxDist2 = 2.2 * 2.2;
@@ -157,7 +170,15 @@ function Scene({ count = 650, radius = 14 }) {
         }
       }
     }
-    s.edgeGeom.attributes.position.needsUpdate = true;
+    const edgeAttr = s.edgeGeom.attributes.position;
+    if (edgeAttr.addUpdateRange) {
+      edgeAttr.clearUpdateRanges?.();
+      edgeAttr.addUpdateRange(0, ePtr * 6);
+    } else if (edgeAttr.updateRange) {
+      edgeAttr.updateRange.offset = 0;
+      edgeAttr.updateRange.count = ePtr * 6;
+    }
+    edgeAttr.needsUpdate = true;
     s.edgeGeom.setDrawRange(0, ePtr * 2);
 
     s.group.rotation.y += delta * 0.03;
@@ -167,7 +188,7 @@ function Scene({ count = 650, radius = 14 }) {
   return null;
 }
 
-export default function NeuralBackground() {
+export default function NeuralBackground({ paused = false }) {
   return (
     <div
       className="fixed inset-0 pointer-events-none"
@@ -177,7 +198,13 @@ export default function NeuralBackground() {
       <Canvas
         camera={{ position: [0, 0, 18], fov: 55 }}
         dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true }}
+        frameloop={paused ? "never" : "always"}
+        gl={{
+          antialias: false,
+          alpha: true,
+          powerPreference: "high-performance",
+          stencil: false,
+        }}
       >
         <Scene count={400} radius={14.4} />
       </Canvas>

@@ -17,6 +17,8 @@ function Avatar({ index, avatarUrl }) {
         <img
           src={avatarUrl}
           alt={`Operator ${num}`}
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-85 group-hover:scale-105 transition-all duration-500 ease-out"
         />
       )}

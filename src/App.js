@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "@/App.css";
 import NeuralBackground from "@/components/NeuralBackground";
 import HomeCenterPiece from "@/components/HomeCenterPiece";
@@ -62,22 +62,6 @@ function App() {
   const [booted, setBooted] = useState(false);
   const [active, setActive] = useState("vision");
   const [muted, setMuted] = useState(false);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const rafRef = useRef(null);
-
-  useEffect(() => {
-    const onMove = (e) => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(() => {
-        setMouse({
-          x: e.clientX / window.innerWidth - 0.5,
-          y: e.clientY / window.innerHeight - 0.5,
-        });
-      });
-    };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
-  }, []);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -117,10 +101,10 @@ function App() {
       {!booted && <IntroAnimation onDone={() => setBooted(true)} />}
       {booted && (
         <>
-          <NeuralBackground />
+          <NeuralBackground paused={!!active} />
           {!active && <HomeCenterPiece />}
           <HUD />
-          {!active && <RadialMenu mouse={mouse} onSelect={(k) => setActive(k)} />}
+          {!active && <RadialMenu onSelect={(k) => setActive(k)} />}
           {ActiveSection && <ActiveSection />}
           <PageNavigator
             active={active}
